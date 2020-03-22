@@ -19,6 +19,8 @@ link1 = Link(node1, node2)
 # this dict is useful because we need to draw the links before the nodes or it will look wrong (line over circle)
 entities = {"nodes": [node1, node2], "links": [link1]}
 
+node_blacklist = list()
+
 # increasing variable for the animation of background
 background_increase = 0
 
@@ -37,6 +39,7 @@ def update():
 def events():
     global running
     global first_infection
+    global node_blacklist
 
     pressed_keys = pg.key.get_pressed()
     events = pg.event.get()
@@ -49,17 +52,24 @@ def events():
             if event.button == 1:
                 #Gameplay has started
                 if first_infection:
-                    for node in entities["nodes"]:
-                        if (mx - node.center[0]) ** 2 + (my - node.center[1]) ** 2 < node.radius ** 2:
-                            #Check for neighbours
-                            infecteds = 0
-                            for link in node.links:
-                                for n in link.nodes:
-                                    if n.infected: infecteds += 1
-                            if infecteds > 0:
-                                # TODO: PROBABILTY
-                                node.infected = True
-                                node.make_surf()
+                    if node not in node_blacklist:
+                        for node in entities["nodes"]:
+                            if (mx - node.center[0]) ** 2 + (my - node.center[1]) ** 2 < node.radius ** 2:
+                                #Check for neighbours
+                                infecteds = 0
+                                for link in node.links:
+                                    for n in link.nodes:
+                                        if n.infected: infecteds += 1
+                                if infecteds > 0:
+                                    # TODO: PROBABILTY
+
+                                    # 20% placeholder
+                                    if randint(1, 25) == 1:
+                                        node.infected = True
+                                        node.make_surf()
+                                    else:
+                                        node_blacklist.append(node)
+
 
                 #Gameplay hasn't started
                 else:
