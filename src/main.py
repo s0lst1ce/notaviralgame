@@ -4,6 +4,7 @@ from random import randint
 from settings import *
 from nodes import Node
 from link import Link
+import gen as gen
 
 # init pygame
 pg.init()
@@ -12,12 +13,16 @@ game_surf = pg.Surface((WIDTH, HEIGHT), pg.SRCALPHA).convert_alpha()
 clock = pg.time.Clock()
 running = True
 
+
+
+
+"""
 node1 = Node(Point(100, 100), NODE_RADIUS)
 node2 = Node(Point(300, 300), NODE_RADIUS)
-link1 = Link(node1, node2)
+link1 = Link(node1, node2)"""
 
 # this dict is useful because we need to draw the links before the nodes or it will look wrong (line over circle)
-entities = {"nodes": [node1, node2], "links": [link1]}
+entities = {"nodes": [], "links": []}
 
 # increasing variable for the animation of background
 background_increase = 0
@@ -28,6 +33,9 @@ first_infection = False
 def start():
     """populate the game_surf"""
     global game_surf
+    global entities
+
+    entities["nodes"] = gen.nodes((8, 10), SPACING)
 
 
 def update():
