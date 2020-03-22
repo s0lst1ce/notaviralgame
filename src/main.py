@@ -52,8 +52,8 @@ def events():
             if event.button == 1:
                 #Gameplay has started
                 if first_infection:
-                    if node not in node_blacklist:
-                        for node in entities["nodes"]:
+                    for node in entities["nodes"]:
+                        if node not in node_blacklist:
                             if (mx - node.center[0]) ** 2 + (my - node.center[1]) ** 2 < node.radius ** 2:
                                 #Check for neighbours
                                 infecteds = 0
@@ -78,6 +78,7 @@ def events():
                             node.infected = True
                             node.make_surf()
                             first_infection = True
+                            break
 
 
 
