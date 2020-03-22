@@ -1,4 +1,5 @@
 import pygame as pg
+from math import sin
 from settings import *
 from nodes import Node
 from link import Link
@@ -7,8 +8,7 @@ import gen as gen
 # init pygame
 pg.init()
 window = pg.display.set_mode((WIDTH, HEIGHT))
-game_surf = pg.Surface((WIDTH, HEIGHT))
-game_surf.fill(WHITE)
+game_surf = pg.Surface((WIDTH, HEIGHT), pg.SRCALPHA).convert_alpha()
 clock = pg.time.Clock()
 running = True
 
@@ -23,6 +23,11 @@ link1 = Link(node1, node2)"""
 # this dict is useful because we need to draw the links before the nodes or it will look wrong (line over circle)
 entities = {"nodes": [], "links": []}
 
+# increasing variable for the animation of background
+background_increase = 0
+
+# a flag to check if gameplay has started
+first_infection = False
 
 def start():
     """populate the game_surf"""
@@ -38,6 +43,7 @@ def update():
 
 def events():
     global running
+    global first_infection
 
     pressed_keys = pg.key.get_pressed()
     events = pg.event.get()
@@ -45,10 +51,41 @@ def events():
         if event.type == pg.QUIT or pressed_keys[pg.K_ESCAPE]:
             running = False
 
+        elif event.type == pg.MOUSEBUTTONDOWN:
+            mx, my = pg.mouse.get_pos()
+            if event.button == 1:
+                #Gameplay has started
+                if first_infection:
+                    for node in entities["nodes"]:
+                        if (mx - node.center[0]) ** 2 + (my - node.center[1]) ** 2 < node.radius ** 2:
+                            #Check for neighbours
+                            for link in node.links:
+                                for n in link.nodes:
+                                    if n.infected: break
+
+                            node.infected = True
+
+                #Gameplay hasn't started
+                else:
+                    for node in entities["nodes"]:
+                        if (mx - node.center[0]) ** 2 + (my - node.center[1]) ** 2 < node.radius ** 2:
+                            node.infected = True
+                            first_infection = True
+
+
 
 def render():
     global window
     global game_surf
+    global background_increase
+
+    window.fill((52, 171, 235))
+    background_increase -= SPEED
+    a = 0
+    for y in range((HEIGHT//RES)+1):
+        a+=1
+        for x in range((WIDTH//RES)+1):
+            pg.draw.circle(window, (140, 215, 255), (x*RES, y*RES), (sin(x+a+background_increase)+2)*1.5)
 
     # drawing game content
     for link in entities["links"]:
