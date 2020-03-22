@@ -60,15 +60,16 @@ def events():
                         if node not in node_blacklist:
                             if (mx - node.center[0]) ** 2 + (my - node.center[1]) ** 2 < node.radius ** 2:
                                 #Check for neighbours
-                                infecteds = 0
+                                infecteds = list()
                                 for link in node.links:
                                     for n in link.nodes:
-                                        if n.infected: infecteds += 1
-                                if infecteds > 0:
+                                        if n.infected and n not in infecteds: infecteds.append(n)
+
+                                if len(infecteds) > 0:
                                     # TODO: PROBABILTY
 
                                     # 20% placeholder
-                                    if randint(1, 25) == 1:
+                                    if randint(1, 2) == 1:
                                         node.infected = True
                                         node.make_surf()
                                     else:
