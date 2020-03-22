@@ -3,8 +3,8 @@ from collections import namedtuple
 Point = namedtuple("Point", ["x", "y"])
 
 
-WIDTH = 1930
-HEIGHT = 1080
+WIDTH = 1366#1930
+HEIGHT = 768#1080
 
 # A collection of commonly used colors and their RGBA values
 ALPHA = (0, 0, 0, 0)

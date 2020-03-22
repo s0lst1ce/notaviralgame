@@ -1,5 +1,6 @@
 import pygame as pg
 from math import sin
+from random import randint
 from settings import *
 from nodes import Node
 from link import Link
@@ -59,11 +60,13 @@ def events():
                     for node in entities["nodes"]:
                         if (mx - node.center[0]) ** 2 + (my - node.center[1]) ** 2 < node.radius ** 2:
                             #Check for neighbours
+                            infecteds = 0
                             for link in node.links:
                                 for n in link.nodes:
-                                    if n.infected: break
-
-                            node.infected = True
+                                    if n.infected: infecteds += 1
+                            if infecteds > 0:
+                                # TODO: PROBABILTY
+                                node.infected = True
 
                 #Gameplay hasn't started
                 else:

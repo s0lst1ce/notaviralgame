@@ -11,6 +11,8 @@ class Link:
         )
         self.nodes = nodes
         self.proxy = proxy
+        for node in self.nodes:
+            node.links.append(self)
 
     def get_color(self):
         if self.proxy:
