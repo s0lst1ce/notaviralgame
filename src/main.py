@@ -16,11 +16,6 @@ from link import Link
 import gen as gen
 
 
-"""
-node1 = Node(Point(100, 100), NODE_RADIUS)
-node2 = Node(Point(300, 300), NODE_RADIUS)
-link1 = Link(node1, node2)"""
-
 # this dict is useful because we need to draw the links before the nodes or it will look wrong (line over circle)
 entities = {"nodes": [], "links": []}
 
@@ -36,6 +31,7 @@ def start():
     global entities
 
     entities["nodes"] = gen.nodes((12, 20), SPACING)
+    entities["links"] = gen.links(*entities["nodes"])
 
 
 def update():
