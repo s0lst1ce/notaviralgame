@@ -1,3 +1,5 @@
+![Game view](https://cdn.discordapp.com/attachments/617778489374015488/691311834652737606/unknown.png)
+
 # README
 
 ## The game: notaviralgame
