@@ -10,23 +10,27 @@ sign = lambda x: (1, -1)[x < 0]
 
 def nodes(amount: tuple, spacing: tuple, bounds: tuple = (WIDTH, HEIGHT), size: int = NODE_RADIUS):
     #making first node
-    nodes = [Node(Point(randint(size, bounds[0]-size), randint(size, bounds[1]-size)), size)]
+    nodes = []
+    rects = []
 
-    angle_inverter = 1
     for i in range(randint(amount[0], amount[1])):
-        loc = nodes[-1].center #starting from the center of the last node
-
-        angle = 2 * pi * random() * angle_inverter #random angle in radian
-        rel_pos = Point(int(cos(angle) * size), int(sin(angle) * size)) #putting point on the border of the circle
-
-        rel_offset = randint(*spacing)
-
-        loc = Point(loc.x + rel_pos.x + sign(rel_pos.x) * rel_offset, loc.y + rel_pos.y + sign(rel_pos.y) * rel_offset)
-
+        loc = Point(randint(size, bounds[0]-size-15), randint(size, bounds[1]-size-15))
+        rects.append(pg.Rect(loc.x- NODE_RADIUS, loc.y - NODE_RADIUS, 2* NODE_RADIUS, 2* NODE_RADIUS))
         nodes.append(Node(loc, size))
-        angle_inverter = angle_inverter * -1
 
 
     #normally not too many rects should be outside the game surface
+    game_rect = pg.Rect(0, 0, WIDTH, HEIGHT)
+    for rect in rects:
+        if not game_rect.contains(rect):
+            #print("not inside " + rect)
+            rects.pop(rect)
+
+    #making sure no two node overlap
+    for rect in rects:
+        to_remove = rect.collidelistall(rects)
+        #print(to_remove)
+        for elem in to_remove:
+            rects.pop(elem)
 
     return nodes
