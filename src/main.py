@@ -1,4 +1,5 @@
 import pygame as pg
+import os
 from math import sin
 from random import randint
 from settings import *
@@ -19,9 +20,10 @@ import gen as gen
 
 #audio
 pg.mixer.init()
-musics =[]
-for music in os.listdir(os.path.join("..", "music")):
-    musics.append(pg.mixer.music.load(os.path.join("..", "music", music)))
+musics = []
+for music in os.listdir(os.path.join("music")):
+    print(os.path.join("music", music))
+    musics.append(pg.mixer.music.load(os.path.join("music", music)))
     #pg.mixer.music.queue(musics[-1])
 
 
@@ -94,6 +96,10 @@ def events():
                             first_infection = True
                             break
 
+        #loop music
+        if not pg.mixer.music.get_busy():
+            pg.mixer.music.rewind()
+
 
 
 def render():
@@ -123,6 +129,7 @@ def render():
 
 
 def main_loop():
+    pg.mixer.music.play(-1)
     while running:
         clock.tick(60)
         events()
