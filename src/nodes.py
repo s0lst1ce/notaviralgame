@@ -5,8 +5,11 @@ surf_infected = pg.Surface((2*NODE_RADIUS, 2*NODE_RADIUS))
 surf_infected.set_colorkey(BACKGROUND_COLOR)
 surf_infected.fill(BACKGROUND_COLOR)
 surf_sain = surf_infected.copy()
-pg.draw.circle(surf_infected, RED, (NODE_RADIUS, NODE_RADIUS), NODE_RADIUS)
-pg.draw.circle(surf_sain, BLUE, (NODE_RADIUS, NODE_RADIUS), NODE_RADIUS)
+
+pg.draw.circle(surf_infected, (254, 254, 254), (NODE_RADIUS, NODE_RADIUS), NODE_RADIUS)
+pg.draw.circle(surf_sain, (254, 254, 254), (NODE_RADIUS, NODE_RADIUS), NODE_RADIUS)
+pg.draw.circle(surf_infected, RED, (NODE_RADIUS, NODE_RADIUS), NODE_RADIUS-5)
+pg.draw.circle(surf_sain, BLUE, (NODE_RADIUS, NODE_RADIUS), NODE_RADIUS-5)
 
 node_surfs = {
     False: surf_sain,
