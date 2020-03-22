@@ -17,11 +17,24 @@ This was a really simple idea in our heads when we set out to do it. However nei
 
 
 
-We hope you’ll have fun playing the game! 
+We hope you’ll have fun playing the game!
 
 *NB: there is no actual game to speak of, just circles to click*
 
 
+
+## Installation
+
+At this time we do not offer pre-built binaries for the game. If you wish to play it you will need to make sure you have:
+
+- python (>=3.7)
+- pygame (2.0.0.dev6)
+
+For this I recommend installing python and then run `python -m pip install -r requirements.txt`. This should take care of everything. Then you simply need to get into the `src` folder and run `main.py`. (ex: `python main.py`).
+
+
+
+The source can be found on [Github](https://github.com/s0lst1ce/notaviralgame)
 
 ## Credits
 
