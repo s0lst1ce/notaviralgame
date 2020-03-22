@@ -21,6 +21,9 @@ entities = {"nodes": [node1, node2], "links": [link1]}
 # increasing variable for the animation of background
 background_increase = 0
 
+# a flag to check if gameplay has started
+first_infection = False
+
 def start():
     """populate the game_surf"""
     global game_surf
@@ -32,12 +35,35 @@ def update():
 
 def events():
     global running
+    global first_infection
 
     pressed_keys = pg.key.get_pressed()
     events = pg.event.get()
     for event in events:
         if event.type == pg.QUIT or pressed_keys[pg.K_ESCAPE]:
             running = False
+
+        elif event.type == pg.MOUSEBUTTONDOWN:
+            mx, my = pg.mouse.get_pos()
+            if event.button == 1:
+                #Gameplay has started
+                if first_infection:
+                    for node in entities["nodes"]:
+                        if (mx - node.center[0]) ** 2 + (my - node.center[1]) ** 2 < node.radius ** 2:
+                            #Check for neighbours
+                            for link in node.links:
+                                for n in link.nodes:
+                                    if n.infected: break
+
+                            node.infected = True
+
+                #Gameplay hasn't started
+                else:
+                    for node in entities["nodes"]:
+                        if (mx - node.center[0]) ** 2 + (my - node.center[1]) ** 2 < node.radius ** 2:
+                            node.infected = True
+                            first_infection = True
+
 
 
 def render():
