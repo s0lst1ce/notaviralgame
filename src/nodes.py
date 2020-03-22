@@ -27,7 +27,7 @@ class Node:
         self.make_surf()
 
     def draw(self, dest):
-        dest.blit(self.surf, (self.center.x, self.center.y))
+        dest.blit(self.surf, (self.center.x - self.radius, self.center.y- self.radius))
 
     def make_surf(self):
         self.surf = node_surfs[self.infected]

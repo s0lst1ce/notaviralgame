@@ -1,5 +1,5 @@
 from random import randint, choice, random
-from math import sin, cos, pi, sqrt
+#from math import sin, cos, pi, sqrt
 
 import pygame as pg
 from settings import *
@@ -32,9 +32,28 @@ def nodes(amount: tuple, spacing: tuple, bounds: tuple = (WIDTH, HEIGHT), size: 
     for rect in rects:
         to_remove = rect.collidelistall(rects)
         #print(to_remove)
-        for elem in to_remove:
-            rects.pop(elem)
-            nodes.pop(elem)
-
+        for elem, i in zip(to_remove, range(0, len(to_remove))):
+            rects.pop(elem-i)
+            nodes.pop(elem-i)
     
     return nodes
+
+def links(*nodes):
+    links = []
+    nodes = list(nodes)
+    for node in nodes:
+        good_enough = 0.5
+        tnodes = nodes.copy()
+        tnodes.pop(nodes.index(node))
+        while good_enough > 0:
+            to_link = choice(tnodes)
+            links.append(Link(to_link, node))
+            node.links.append(links[-1])
+            to_link.links.append(links[-1])
+
+            good_enough -= random() * len(node.links)
+            print("good_enough is :", good_enough)
+
+
+    print(links)
+    return links
