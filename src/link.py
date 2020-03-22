@@ -21,4 +21,5 @@ class Link:
             return BLUE
 
     def draw(self, dest):
-        pg.draw.line(dest, self.get_color(), self.nodes[0].center, self.nodes[1].center)
+        pg.draw.line(dest, (254, 254, 254), self.nodes[0].center, self.nodes[1].center, 9)
+        pg.draw.line(dest, self.get_color(), self.nodes[0].center, self.nodes[1].center, 7)

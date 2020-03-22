@@ -10,6 +10,8 @@ game_surf = pg.Surface((WIDTH, HEIGHT), pg.SRCALPHA).convert_alpha()
 clock = pg.time.Clock()
 running = True
 
+fxsurf = pg.Surface((WIDTH-70, HEIGHT-70)).convert()
+fxsurf.set_alpha(128)
 
 from nodes import Node
 from link import Link
@@ -99,6 +101,8 @@ def render():
         a+=1
         for x in range((WIDTH//RES)+1):
             pg.draw.circle(window, (140, 215, 255), (x*RES, y*RES), (sin(x+a+background_increase)+2)*1.5)
+
+    window.blit(fxsurf, (35, 35))
 
     # drawing game content
     for link in entities["links"]:
