@@ -1,1 +1,5 @@
-import pygame as pgm
+WIDTH = 1930
+HEIGHT = 1080
+
+# COLORS
+WHITE = (255, 255, 255)
