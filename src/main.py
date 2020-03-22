@@ -67,12 +67,14 @@ def events():
                             if infecteds > 0:
                                 # TODO: PROBABILTY
                                 node.infected = True
+                                node.make_surf()
 
                 #Gameplay hasn't started
                 else:
                     for node in entities["nodes"]:
                         if (mx - node.center[0]) ** 2 + (my - node.center[1]) ** 2 < node.radius ** 2:
                             node.infected = True
+                            node.make_surf()
                             first_infection = True
 
 
