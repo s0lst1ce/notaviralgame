@@ -15,6 +15,13 @@ from nodes import Node
 from link import Link
 import gen as gen
 
+#audio
+pg.mixer.init()
+musics =[]
+for music in os.listdir(os.path.join("..", "music")):
+    musics.append(pg.mixer.music.load(os.path.join("..", "music", music)))
+    #pg.mixer.music.queue(musics[-1])
+
 
 # this dict is useful because we need to draw the links before the nodes or it will look wrong (line over circle)
 entities = {"nodes": [], "links": []}

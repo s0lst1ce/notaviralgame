@@ -19,3 +19,10 @@ Upon failure you:
 
 Some are protected by a proxy that protects against known infected.
 
+
+
+
+
+            index = rects.index(elem)
+            rects.pop(index)
+            nodes.pop(index)
