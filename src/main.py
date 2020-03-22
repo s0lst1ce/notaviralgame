@@ -2,9 +2,6 @@ import pygame as pg
 from math import sin
 from random import randint
 from settings import *
-from nodes import Node
-from link import Link
-import gen as gen
 
 # init pygame
 pg.init()
@@ -14,6 +11,9 @@ clock = pg.time.Clock()
 running = True
 
 
+from nodes import Node
+from link import Link
+import gen as gen
 
 
 """
