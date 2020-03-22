@@ -1,1 +1,1 @@
-import pygame as pgm
+import pygame as pg
