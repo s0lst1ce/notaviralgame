@@ -35,7 +35,7 @@ def start():
     global game_surf
     global entities
 
-    entities["nodes"] = gen.nodes((8, 10), SPACING)
+    entities["nodes"] = gen.nodes((12, 20), SPACING)
 
 
 def update():

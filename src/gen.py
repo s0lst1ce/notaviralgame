@@ -18,13 +18,15 @@ def nodes(amount: tuple, spacing: tuple, bounds: tuple = (WIDTH, HEIGHT), size: 
         rects.append(pg.Rect(loc.x- NODE_RADIUS, loc.y - NODE_RADIUS, 2* NODE_RADIUS, 2* NODE_RADIUS))
         nodes.append(Node(loc, size))
 
-
+    print(rects[0])
     #normally not too many rects should be outside the game surface
     game_rect = pg.Rect(0, 0, WIDTH, HEIGHT)
     for rect in rects:
         if not game_rect.contains(rect):
-            #print("not inside " + rect)
-            rects.pop(rect)
+            print("not inside " + rect)
+            index = rects.index(rect)
+            rects.pop(index)
+            nodes.pop(index)
 
     #making sure no two node overlap
     for rect in rects:
@@ -32,5 +34,7 @@ def nodes(amount: tuple, spacing: tuple, bounds: tuple = (WIDTH, HEIGHT), size: 
         #print(to_remove)
         for elem in to_remove:
             rects.pop(elem)
+            nodes.pop(elem)
 
+    
     return nodes
