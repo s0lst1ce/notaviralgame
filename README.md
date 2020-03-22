@@ -1,6 +1,6 @@
 # README
 
-## The game
+## The game: notaviralgame
 
 This game was made for the [Trijam#62](https://itch.io/jam/trijam-62) game jam which theme was *Viral Infection*. We didn’t want the COVID19 interpretation of it so we figured we’d do a game revolving around a computer viral infection. 
 
